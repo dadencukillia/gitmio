@@ -1,12 +1,18 @@
-MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
-PROJECT_ROOT := $(dir $(MKFILE_PATH))
-UID := $(shell id -u)
-GID := $(shell id -g)
-
 build_client:
-	docker run --rm \
-		-u $(UID):$(GID) \
-		-v $(PROJECT_ROOT)/client:/home/bun/app \
-		-w /home/bun/app \
-		oven/bun:latest \
-		sh -c "bun install && bun run build"
+	cd client; (bun install && bun run build)
+
+move_client_bundle:
+	mv ./client/build/ ./server/client-static/
+	chmod -R 0777 ./server/client-static/
+
+prepare_server_dev: build_client move_client_bundle
+	- echo "Done!"
+
+dev_server:
+	@if [ ! -d "./server/client-static" ]; then \
+		$(MAKE) prepare_server_dev; \
+	fi
+	cd server; cargo run
+
+dev_client:
+	cd client; bun run dev

@@ -1,8 +1,23 @@
 /.git
 
-/client
-!/client/build
+# OS
 
-/target
 /**/.DS_Store
 /**/Thumbs.db
+
+# Backend
+
+/server/target
+/server/client-static
+
+# Frontend
+
+/client/node_modules
+/client/.output
+/client/.vercel
+/client/.netlify
+/client/.wrangler
+/client/.svelte-kit
+/client/build
+/client/vite.config.js.timestamp-*
+/client/vite.config.ts.timestamp-*
