@@ -1,0 +1,8 @@
+/.git
+
+/client
+!/client/build
+
+/target
+/**/.DS_Store
+/**/Thumbs.db
