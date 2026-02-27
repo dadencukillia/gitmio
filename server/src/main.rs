@@ -1,17 +1,16 @@
-use actix_web::{App, HttpServer, Responder, get};
+use env_logger::Env;
 
-#[get("/")]
-async fn index() -> impl Responder {
-    "Hello world!"
-}
+mod db;
+mod git;
+mod utils;
+mod web;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .service(index)
-    })
-    .bind(("0.0.0.0", 8080))?
-    .run()
-    .await
+    env_logger::init_from_env(
+        Env::default()
+            .default_filter_or("info")
+    );
+
+    web::run_webserver().await
 }
