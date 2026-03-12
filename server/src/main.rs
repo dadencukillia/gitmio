@@ -12,5 +12,6 @@ async fn main() -> std::io::Result<()> {
             .default_filter_or("info")
     );
 
+    git::run_git_server(22).await.unwrap();
     web::run_webserver().await
 }
