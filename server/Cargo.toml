@@ -19,3 +19,4 @@ actix-extensible-rate-limit = "=0.4.0"
 thrussh = "0.40.4"
 thrussh-keys = "0.23.2"
 uuid = { version = "1.22.0", features = [ "v4" ] }
+dashmap = "6.1.0"
